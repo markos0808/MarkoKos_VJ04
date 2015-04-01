@@ -19,14 +19,7 @@ namespace LOTO_aplikacija
             loto = new Loto();
         }
 
-    
-
-        private void textBox6_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
+        private void textBox6_TextChanged(object sender, EventArgs e){}
 
         private void btnUplati_Click(object sender, EventArgs e)
         {
@@ -65,10 +58,5 @@ namespace LOTO_aplikacija
             lblBrojPogodaka.Text = brojPogodaka.ToString();
 
         }
-
-
-
-
-
     }
 }
