@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace LOTO_aplikacija
 {
-    public partial class Form1 : Form
+    public partial class FrmLoto : Form
     {
-        public Form1()
+        public FrmLoto()
         {
             InitializeComponent();
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
