@@ -1,0 +1,134 @@
+Bankovni racun
+-----------------------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace Banka
+{
+public class BankovniRacun
+{
+Random rnd = new Random();
+public string BrojRacuna {get;set;}
+public int PIN {get;set;}
+private double Stanje {get;set;}
+public BankovniRacun(string brojRacuna, int pin)
+{
+BrojRacuna = brojRacuna;
+PIN = pin;
+Stanje = rnd.Next(1000, 10000);
+}
+public void SmanjiStanje(double iznos){
+Stanje -= iznos;
+}
+public double ProvjeriRaspoloziviIznos()
+{
+return Stanje;
+}
+}
+}
+________________________________________________________________
+
+Banka
+----------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+namespace Banka
+{
+public class Banka
+{
+private List<BankovniRacun> listaRacuna;
+public void InicijalizirajPodatke()
+{
+listaRacuna = new List<BankovniRacun>();
+listaRacuna.Add(new BankovniRacun("HR11111111!",1111));
+listaRacuna.Add(new BankovniRacun("HR11111111!", 6666));
+listaRacuna.Add(new BankovniRacun("HR11111111!", 7777));
+}
+public bool ProvjeriPodatke(string brojRacuna, int PIN)
+{
+if (listaRacuna.Exists(x => (x.PIN == PIN && x.BrojRacuna == brojRacuna)))
+{
+MessageBox.Show("Ispravan unos!");
+return true;
+}
+else MessageBox.Show("Krivi unos!");
+return false;
+}
+public void PodigniIznos(string brojRacuna,double iznosPodizanje)
+{
+foreach (var element in listaRacuna)
+{
+if (element.BrojRacuna == brojRacuna)
+{
+double saldo=element.ProvjeriRaspoloziviIznos();
+if (saldo > iznosPodizanje) element.SmanjiStanje(iznosPodizanje);
+}
+}
+}
+}
+}
+_________________________________________________________________________________
+
+Bankomat
+--------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+namespace Banka
+{
+public partial class FrmBankomat : Form
+{
+Banka objekt;
+public FrmBankomat()
+{
+InitializeComponent();
+panelOpcijeAplik.Hide();
+objekt=new Banka();
+objekt.InicijalizirajPodatke();
+}
+private void FrmBankomat_Load(object sender, EventArgs e)
+{
+}
+private void panel1_Paint(object sender, PaintEventArgs e)
+{
+}
+private void label1_Click(object sender, EventArgs e)
+{
+}
+private void btnPrijava_Click(object sender, EventArgs e)
+{
+bool status= objekt.ProvjeriPodatke(txtBrojRac.Text, int.Parse(txtPIN.Text));
+if (status)
+{
+panelOpcijeAplik.Show();
+}
+}
+private void label6_Click(object sender, EventArgs e)
+{
+}
+private void panel1_Paint_1(object sender, PaintEventArgs e)
+{
+}
+private void btnUnesiIznos_Click(object sender, EventArgs e)
+{
+objekt.PodigniIznos(txtBrojRac.Text, double.Parse(txtIznos.Text));
+}
+private void txtIznos_TextChanged(object sender, EventArgs e)
+{
+}
+}
+}
+_____________________________________________________________________________________
+
