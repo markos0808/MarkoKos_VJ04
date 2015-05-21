@@ -1,0 +1,359 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EvidencijaStudenataModel.Store" Alias="Self" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="EvidencijaStudenataModelStoreContainer">
+          <EntitySet Name="Aktivnost" EntityType="EvidencijaStudenataModel.Store.Aktivnost" store:Type="Tables" />
+          <EntitySet Name="AktivnostStudenta" EntityType="EvidencijaStudenataModel.Store.AktivnostStudenta" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="EvidencijaStudenataModel.Store.Student" store:Type="Tables" />
+          <EntitySet Name="Tim" EntityType="EvidencijaStudenataModel.Store.Tim" store:Type="Tables" />
+          <EntitySet Name="TipAktivnosti" EntityType="EvidencijaStudenataModel.Store.TipAktivnosti" store:Type="Tables" />
+          <AssociationSet Name="FK_Aktivnost_AktivnostStudenata" Association="EvidencijaStudenataModel.Store.FK_Aktivnost_AktivnostStudenata">
+            <End Role="Aktivnost" EntitySet="Aktivnost" />
+            <End Role="AktivnostStudenta" EntitySet="AktivnostStudenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tim_Student" Association="EvidencijaStudenataModel.Store.FK_Tim_Student">
+            <End Role="Tim" EntitySet="Tim" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TipAktivnosti_Aktivnost" Association="EvidencijaStudenataModel.Store.FK_TipAktivnosti_Aktivnost">
+            <End Role="TipAktivnosti" EntitySet="TipAktivnosti" />
+            <End Role="Aktivnost" EntitySet="Aktivnost" />
+          </AssociationSet>
+          <AssociationSet Name="FK2" Association="EvidencijaStudenataModel.Store.FK2">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="AktivnostStudenta" EntitySet="AktivnostStudenta" />
+          </AssociationSet>
+        </EntityContainer>
+        <!--Errors Found During Generation:
+            warning 6035: The relationship 'FK1' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+            -->
+        <EntityType Name="Aktivnost">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="MaxBodovi" Type="float" Nullable="false" />
+          <Property Name="UvjetPotpis" Type="float" Nullable="false" />
+          <Property Name="UvjetOcjena" Type="float" Nullable="false" />
+          <Property Name="Pocetak" Type="datetime" />
+          <Property Name="Kraj" Type="datetime" />
+          <Property Name="Opis" Type="nvarchar" MaxLength="255" />
+          <Property Name="TipAktivnostiId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AktivnostStudenta">
+          <Key>
+            <PropertyRef Name="AktivnostId" />
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="AktivnostId" Type="int" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="Bodovi" Type="float" Nullable="false" />
+          <Property Name="Datum" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Ime" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="Prezime" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="Status" Type="nchar" MaxLength="1" />
+          <Property Name="OdabraniModel" Type="nchar" MaxLength="1" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" />
+          <Property Name="Napomena" Type="nvarchar" MaxLength="255" />
+          <Property Name="TimId" Type="int" />
+        </EntityType>
+        <EntityType Name="Tim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="OznakaTima" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="NazivProjekta" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="OpisProjekta" Type="nvarchar" MaxLength="255" />
+          <Property Name="Napomena" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="TipAktivnosti">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Tip" Type="nvarchar" Nullable="false" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK_Aktivnost_AktivnostStudenata">
+          <End Role="Aktivnost" Type="EvidencijaStudenataModel.Store.Aktivnost" Multiplicity="1" />
+          <End Role="AktivnostStudenta" Type="EvidencijaStudenataModel.Store.AktivnostStudenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aktivnost">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AktivnostStudenta">
+              <PropertyRef Name="AktivnostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tim_Student">
+          <End Role="Tim" Type="EvidencijaStudenataModel.Store.Tim" Multiplicity="0..1" />
+          <End Role="Student" Type="EvidencijaStudenataModel.Store.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tim">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="TimId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TipAktivnosti_Aktivnost">
+          <End Role="TipAktivnosti" Type="EvidencijaStudenataModel.Store.TipAktivnosti" Multiplicity="1" />
+          <End Role="Aktivnost" Type="EvidencijaStudenataModel.Store.Aktivnost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipAktivnosti">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Aktivnost">
+              <PropertyRef Name="TipAktivnostiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK2">
+          <End Role="Student" Type="EvidencijaStudenataModel.Store.Student" Multiplicity="1" />
+          <End Role="AktivnostStudenta" Type="EvidencijaStudenataModel.Store.AktivnostStudenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AktivnostStudenta">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EvidencijaStudenataModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="EvidencijaStudenataEntities4" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Aktivnosts" EntityType="EvidencijaStudenataModel.Aktivnost" />
+          <EntitySet Name="AktivnostStudentas" EntityType="EvidencijaStudenataModel.AktivnostStudenta" />
+          <EntitySet Name="Students" EntityType="EvidencijaStudenataModel.Student" />
+          <EntitySet Name="Tims" EntityType="EvidencijaStudenataModel.Tim" />
+          <EntitySet Name="TipAktivnostis" EntityType="EvidencijaStudenataModel.TipAktivnosti" />
+          <AssociationSet Name="FK_Aktivnost_AktivnostStudenata" Association="EvidencijaStudenataModel.FK_Aktivnost_AktivnostStudenata">
+            <End Role="Aktivnost" EntitySet="Aktivnosts" />
+            <End Role="AktivnostStudenta" EntitySet="AktivnostStudentas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TipAktivnosti_Aktivnost" Association="EvidencijaStudenataModel.FK_TipAktivnosti_Aktivnost">
+            <End Role="TipAktivnosti" EntitySet="TipAktivnostis" />
+            <End Role="Aktivnost" EntitySet="Aktivnosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK2" Association="EvidencijaStudenataModel.FK2">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="AktivnostStudenta" EntitySet="AktivnostStudentas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tim_Student" Association="EvidencijaStudenataModel.FK_Tim_Student">
+            <End Role="Tim" EntitySet="Tims" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Aktivnost">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="MaxBodovi" Type="Double" Nullable="false" />
+          <Property Name="UvjetPotpis" Type="Double" Nullable="false" />
+          <Property Name="UvjetOcjena" Type="Double" Nullable="false" />
+          <Property Name="Pocetak" Type="DateTime" Precision="3" />
+          <Property Name="Kraj" Type="DateTime" Precision="3" />
+          <Property Name="Opis" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="TipAktivnostiId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AktivnostiStudenata" Relationship="EvidencijaStudenataModel.FK_Aktivnost_AktivnostStudenata" FromRole="Aktivnost" ToRole="AktivnostStudenta" />
+          <NavigationProperty Name="TipAktivnosti" Relationship="EvidencijaStudenataModel.FK_TipAktivnosti_Aktivnost" FromRole="Aktivnost" ToRole="TipAktivnosti" />
+        </EntityType>
+        <EntityType Name="AktivnostStudenta">
+          <Key>
+            <PropertyRef Name="AktivnostId" />
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="AktivnostId" Type="Int32" Nullable="false" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="Bodovi" Type="Double" Nullable="false" />
+          <Property Name="Datum" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Aktivnost" Relationship="EvidencijaStudenataModel.FK_Aktivnost_AktivnostStudenata" FromRole="AktivnostStudenta" ToRole="Aktivnost" />
+          <NavigationProperty Name="Student" Relationship="EvidencijaStudenataModel.FK2" FromRole="AktivnostStudenta" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Ime" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Prezime" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Status" Type="String" MaxLength="1" Unicode="true" FixedLength="true" />
+          <Property Name="OdabraniModel" Type="String" MaxLength="1" Unicode="true" FixedLength="true" />
+          <Property Name="Email" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Napomena" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="TimId" Type="Int32" />
+          <NavigationProperty Name="AktivnostiStudenta" Relationship="EvidencijaStudenataModel.FK2" FromRole="Student" ToRole="AktivnostStudenta" />
+          <NavigationProperty Name="Tim" Relationship="EvidencijaStudenataModel.FK_Tim_Student" FromRole="Student" ToRole="Tim" />
+        </EntityType>
+        <EntityType Name="Tim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="OznakaTima" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="NazivProjekta" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="OpisProjekta" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Napomena" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Studenti" Relationship="EvidencijaStudenataModel.FK_Tim_Student" FromRole="Tim" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="TipAktivnosti">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Tip" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Aktivnosti" Relationship="EvidencijaStudenataModel.FK_TipAktivnosti_Aktivnost" FromRole="TipAktivnosti" ToRole="Aktivnost" />
+        </EntityType>
+        <Association Name="FK_Aktivnost_AktivnostStudenata">
+          <End Role="Aktivnost" Type="EvidencijaStudenataModel.Aktivnost" Multiplicity="1" />
+          <End Role="AktivnostStudenta" Type="EvidencijaStudenataModel.AktivnostStudenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aktivnost">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AktivnostStudenta">
+              <PropertyRef Name="AktivnostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TipAktivnosti_Aktivnost">
+          <End Role="TipAktivnosti" Type="EvidencijaStudenataModel.TipAktivnosti" Multiplicity="1" />
+          <End Role="Aktivnost" Type="EvidencijaStudenataModel.Aktivnost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipAktivnosti">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Aktivnost">
+              <PropertyRef Name="TipAktivnostiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK2">
+          <End Role="Student" Type="EvidencijaStudenataModel.Student" Multiplicity="1" />
+          <End Role="AktivnostStudenta" Type="EvidencijaStudenataModel.AktivnostStudenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AktivnostStudenta">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tim_Student">
+          <End Role="Tim" Type="EvidencijaStudenataModel.Tim" Multiplicity="0..1" />
+          <End Role="Student" Type="EvidencijaStudenataModel.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tim">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="TimId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EvidencijaStudenataModelStoreContainer" CdmEntityContainer="EvidencijaStudenataEntities4">
+          <EntitySetMapping Name="Aktivnosts">
+            <EntityTypeMapping TypeName="EvidencijaStudenataModel.Aktivnost">
+              <MappingFragment StoreEntitySet="Aktivnost">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="MaxBodovi" ColumnName="MaxBodovi" />
+                <ScalarProperty Name="UvjetPotpis" ColumnName="UvjetPotpis" />
+                <ScalarProperty Name="UvjetOcjena" ColumnName="UvjetOcjena" />
+                <ScalarProperty Name="Pocetak" ColumnName="Pocetak" />
+                <ScalarProperty Name="Kraj" ColumnName="Kraj" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+                <ScalarProperty Name="TipAktivnostiId" ColumnName="TipAktivnostiId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AktivnostStudentas">
+            <EntityTypeMapping TypeName="EvidencijaStudenataModel.AktivnostStudenta">
+              <MappingFragment StoreEntitySet="AktivnostStudenta">
+                <ScalarProperty Name="AktivnostId" ColumnName="AktivnostId" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Bodovi" ColumnName="Bodovi" />
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="EvidencijaStudenataModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ime" ColumnName="Ime" />
+                <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="OdabraniModel" ColumnName="OdabraniModel" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Napomena" ColumnName="Napomena" />
+                <ScalarProperty Name="TimId" ColumnName="TimId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tims">
+            <EntityTypeMapping TypeName="EvidencijaStudenataModel.Tim">
+              <MappingFragment StoreEntitySet="Tim">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OznakaTima" ColumnName="OznakaTima" />
+                <ScalarProperty Name="NazivProjekta" ColumnName="NazivProjekta" />
+                <ScalarProperty Name="OpisProjekta" ColumnName="OpisProjekta" />
+                <ScalarProperty Name="Napomena" ColumnName="Napomena" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipAktivnostis">
+            <EntityTypeMapping TypeName="EvidencijaStudenataModel.TipAktivnosti">
+              <MappingFragment StoreEntitySet="TipAktivnosti">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Tip" ColumnName="Tip" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
