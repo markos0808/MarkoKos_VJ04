@@ -17,7 +17,7 @@ namespace Z1
             Form1.brojForme = Application.OpenForms.Count;
             foreach (Form1 form in Application.OpenForms)
             {
-                form
+                form.button1.Text=Form1.brojForme.ToString();
             }
         }
     }
