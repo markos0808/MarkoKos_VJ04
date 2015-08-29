@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PIServer", "VJ7G9\PIServer.csproj", "{81590E46-F994-48DA-B184-304C9F6E4189}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PIClient", "PIClient\PIClient.csproj", "{B1E74239-1159-404E-A92B-291A7D33F497}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PIChat", "PIChat\PIChat.csproj", "{9FFBB1D7-C8A0-440C-89E5-C5F60BFB65FC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81590E46-F994-48DA-B184-304C9F6E4189}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81590E46-F994-48DA-B184-304C9F6E4189}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81590E46-F994-48DA-B184-304C9F6E4189}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81590E46-F994-48DA-B184-304C9F6E4189}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1E74239-1159-404E-A92B-291A7D33F497}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1E74239-1159-404E-A92B-291A7D33F497}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1E74239-1159-404E-A92B-291A7D33F497}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1E74239-1159-404E-A92B-291A7D33F497}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FFBB1D7-C8A0-440C-89E5-C5F60BFB65FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FFBB1D7-C8A0-440C-89E5-C5F60BFB65FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FFBB1D7-C8A0-440C-89E5-C5F60BFB65FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FFBB1D7-C8A0-440C-89E5-C5F60BFB65FC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
