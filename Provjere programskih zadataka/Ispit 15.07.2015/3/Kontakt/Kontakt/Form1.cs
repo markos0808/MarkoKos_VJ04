@@ -67,10 +67,7 @@ namespace Kontakt
 
         private void listBoxPopisKontakata_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listBoxPopisKontakata.SelectedItems.Count > 0)
-            {
-               
-            }
+           
         }
     }
 }

@@ -19,10 +19,6 @@ namespace RGB
             InitializeComponent();
         }
 
-        private void frmMain_Load(object sender, EventArgs e)
-        {
-          
-        }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {          
@@ -80,12 +76,5 @@ namespace RGB
                 panelBoja.BackColor = kolor.FromArgb2(this, prvi, drugi, treci, cetvrti);
             }
         }
-
-
-
-        
-
-
-
     }
 }

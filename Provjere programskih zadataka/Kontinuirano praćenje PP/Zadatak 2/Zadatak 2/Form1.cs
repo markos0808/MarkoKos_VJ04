@@ -20,9 +20,6 @@ namespace Zadatak_2
 
         private void btnDodaj_Click(object sender, EventArgs e)
         {
-            BindingSource bs = new BindingSource(lista, null);
-            dgvStatistika.DataSource = bs;
-
             string naziv = txtNazivMjerenja.Text;
             int temperatura = int.Parse(txtTemperatura.Text);
             DateTime vrijeme = dtpVrijeme.Value;
@@ -30,8 +27,9 @@ namespace Zadatak_2
             Measurement mjera = new Measurement(naziv, temperatura, vrijeme);
             lista.Add(mjera);
             CalculateAverage();
-
             
+            BindingSource bs = new BindingSource(lista, null);
+            dgvStatistika.DataSource = bs;                 
         }
 
         private void CalculateAverage()
@@ -44,11 +42,17 @@ namespace Zadatak_2
             {
                 suma = suma + m.Temperature;
             }
+            
             av = suma / brojac;
+            lblRez.Text = av.ToString();
 
             if (av > 0)
             {
-                lblRez.Text = av.ToString();
+                lblRez.ForeColor = Color.Red;
+            }
+
+            else
+            {
                 lblRez.ForeColor = Color.Blue;
             }
         }

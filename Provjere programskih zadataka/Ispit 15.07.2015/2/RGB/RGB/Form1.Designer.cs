@@ -173,7 +173,6 @@
             this.Controls.Add(this.panelBoja);
             this.Name = "frmMain";
             this.Text = "Software Engineering - FOI 2015";
-            this.Load += new System.EventHandler(this.frmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVrijednosti)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudRed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudGreen)).EndInit();

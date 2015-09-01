@@ -8,9 +8,9 @@ namespace Zadatak_2
 {
     public class Measurement
     {
-        public string Name;
-        public int Temperature;
-        public DateTime Time;
+        public string Name { get; set; }
+        public int Temperature { get; set; }
+        public DateTime Time { get; set; }
 
         public Measurement(string naziv, int temperatura, DateTime vrijeme)
         {
