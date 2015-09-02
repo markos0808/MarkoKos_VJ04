@@ -7,36 +7,26 @@ using System.Threading.Tasks;
 
 namespace RGB
 {
-    class MyColor 
+    class MyColor
     {
         public int Red { get; set; }
         public int Green { get; set; }
         public int Blue { get; set; }
         public string Name { get; set; }
 
-        public MyColor(frmMain forma, int prvi, int drugi, int treci, string cetvrti)
-        {
-            this.Red = prvi;
-            this.Green = drugi;
-            this.Blue = treci;
-            this.Name = cetvrti;
-        }
 
-        public System.Drawing.Color FromArgb2(frmMain forma, int prvi, int drugi, int treci, string cetvrti)
+        public MyColor(int red, int green, int blue, string name)
         {
-            this.Red = prvi;
-            this.Green = drugi;
-            this.Blue = treci;
-            this.Name = cetvrti;
-            return Color.FromArgb(prvi, drugi, treci);
+            this.Red = red;
+            this.Green = green;
+            this.Blue = blue;
+            this.Name = name;
         }
 
 
-        
-        
-
-
-
+        public System.Drawing.Color GetColor()
+        {
+            return System.Drawing.Color.FromArgb(Red, Green, Blue);
+        }
     }
-  
 }
