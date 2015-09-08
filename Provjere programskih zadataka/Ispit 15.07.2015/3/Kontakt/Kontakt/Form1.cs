@@ -12,62 +12,118 @@ namespace Kontakt
 {
     public partial class FrmGlavna : Form
     {
-        List<Contact> kontakt = new List<Contact>();
-
+        List<Contact> kontakti = new List<Contact>();
         public FrmGlavna()
         {
             InitializeComponent();
         }
 
-        private void Omoguci()
-        {
-            foreach (Control c in this.Controls)
-            {
-                if (c is TextBox)
-                {
-                    c.Enabled = true;
-                }
-            }
-        }
-
-        private void Onemoguci()
-        {
-            foreach (Control c in this.Controls)
-            {
-                if (c is TextBox)
-                {
-                    c.Enabled = false;
-                }
-            }
-        }
 
         private void FrmGlavna_Load(object sender, EventArgs e)
         {
-            Onemoguci();
+            UkljuciKontrole(false);
         }
+
 
         private void btnDodajNovi_Click(object sender, EventArgs e)
         {
-            Omoguci();
+            UkljuciKontrole(true);
+            PrikaziKontakt(null);
         }
+
 
         private void btnSpremi_Click(object sender, EventArgs e)
-        {
-            string j = txtIme.Text;
-            string d = txtPrezime.Text;
-            string t = txtEmail.Text;
-            string c = txtTelefon.Text;
+        {       
+            
+            Contact cont = new Contact();
+            cont.Ime = txtIme.Text;
+            cont.Prezime = txtPrezime.Text;
+            cont.Email = txtEmail.Text;
+            cont.Telefon = txtTelefon.Text;
+     
+            kontakti.Add(cont);
 
-            Onemoguci();
-
-            Contact cc = new Contact(j, d, t, c);
-            kontakt.Add(cc);
-            listBoxPopisKontakata.Items.Add(j + " " + d);
+            UkljuciKontrole(false);
+            OsvjeziPrikaz(txtTrazi.Text);
         }
+
 
         private void listBoxPopisKontakata_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+            Contact odabrani = kontakti[listBoxPopisKontakata.SelectedIndex];
+            UkljuciKontrole(false);
+            PrikaziKontakt(odabrani);
+        }
+
+
+        private void UkljuciKontrole(bool ukljuci)
+        {
+            foreach (Control c in this.Controls)
+            {
+                if (c is TextBox || c is ComboBox)
+                {
+                    c.Enabled = ukljuci;
+                }
+            }
+        }
+
+
+        private void PrikaziKontakt(Contact kontakt)
+        {
+            if (kontakt != null)
+            {
+                txtIme.Text = kontakt.Ime;
+                txtPrezime.Text = kontakt.Prezime;
+                txtEmail.Text = kontakt.Email;
+                txtTelefon.Text = kontakt.Telefon;
+          
+            }
+
+            else
+            {
+                txtIme.Text = "";
+                txtPrezime.Text = "";
+                txtEmail.Text = "";
+                txtTelefon.Text = "";
+                cmbGrupa.Text = "Općenito";
+            }
+        }
+
+
+        private void OsvjeziPrikaz(string trazi)
+        {
+            listBoxPopisKontakata.Items.Clear();
+            bool ok;
+            
+
+            foreach (Contact item in kontakti)
+            {
+                ok = true;
+                if (trazi != null && trazi != string.Empty)
+                {
+                    ok = false;
+                    if (item.Ime.Contains(trazi) || item.Prezime.Contains(trazi) || item.Email.Contains(trazi) || item.Telefon.Contains(trazi))
+                    {
+                        ok = true;
+                    }
+                }
+
+                if (ok)
+                {
+                    listBoxPopisKontakata.Items.Add(item.Ime + " " + item.Prezime);
+                }
+            }
+        }
+
+
+        private void OsvjeziPrikaz()
+        {
+            OsvjeziPrikaz(null);
+        }
+
+        private void txtTrazi_TextChanged(object sender, EventArgs e)
+        {
+            OsvjeziPrikaz(txtTrazi.Text);
         }
     }
 }

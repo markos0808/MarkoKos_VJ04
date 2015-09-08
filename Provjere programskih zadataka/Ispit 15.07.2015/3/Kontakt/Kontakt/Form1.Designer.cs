@@ -34,7 +34,7 @@
             this.txtPrezime = new System.Windows.Forms.TextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtTelefon = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.txtTrazi = new System.Windows.Forms.TextBox();
             this.lblKontakti = new System.Windows.Forms.Label();
             this.lblIme = new System.Windows.Forms.Label();
             this.lblPrezime = new System.Windows.Forms.Label();
@@ -94,12 +94,13 @@
             this.txtTelefon.Size = new System.Drawing.Size(148, 20);
             this.txtTelefon.TabIndex = 5;
             // 
-            // textBox5
+            // txtTrazi
             // 
-            this.textBox5.Location = new System.Drawing.Point(61, 377);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(158, 20);
-            this.textBox5.TabIndex = 6;
+            this.txtTrazi.Location = new System.Drawing.Point(61, 377);
+            this.txtTrazi.Name = "txtTrazi";
+            this.txtTrazi.Size = new System.Drawing.Size(158, 20);
+            this.txtTrazi.TabIndex = 6;
+            this.txtTrazi.TextChanged += new System.EventHandler(this.txtTrazi_TextChanged);
             // 
             // lblKontakti
             // 
@@ -195,7 +196,7 @@
             this.Controls.Add(this.lblPrezime);
             this.Controls.Add(this.lblIme);
             this.Controls.Add(this.lblKontakti);
-            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.txtTrazi);
             this.Controls.Add(this.txtTelefon);
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.txtPrezime);
@@ -212,7 +213,6 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox5;
         public System.Windows.Forms.Label lblKontakti;
         public System.Windows.Forms.Label lblTrazi;
         public System.Windows.Forms.ListBox listBoxPopisKontakata;
@@ -228,6 +228,7 @@
         public System.Windows.Forms.ComboBox cmbGrupa;
         public System.Windows.Forms.Button btnDodajNovi;
         public System.Windows.Forms.Button btnSpremi;
+        public System.Windows.Forms.TextBox txtTrazi;
     }
 }
 
